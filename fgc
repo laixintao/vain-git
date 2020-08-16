@@ -14,7 +14,10 @@ def download_stat():
     start = (datetime.datetime.now() - datetime.timedelta(days=3 * 365)).strftime(
         "%Y-%m-%d"
     )
-    end = datetime.datetime.now().strftime("%Y-%m-%d")
+    # due to timezone, if not substract 1 day, github will return Not Found.
+    end = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(
+        "%Y-%m-%d"
+    )
 
     conn = http.client.HTTPSConnection("github.com")
 
